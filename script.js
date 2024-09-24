@@ -49,26 +49,28 @@ function playGame(player1,player2){
     }
 }
 function determineWinner(player1,player2,board){
-        let result;
+    function checkBoard(){
         for(let i=0;i<3;i++){
             for(let j=0;j<1;j++){
                 if(board[i][j]===board[i][j+1] && board[i][j]===board[i][j+2] && board[i][j]!==0){
-                    result=board[i][j]
+                    return board[i][j]
                 }
                 if(board[j][i]===board[j+1][i] && board[j][i]===board[j+2][i] && board[j][i]!==0){
-                    result= board[j][i]
+                    return board[j][i]
                 }
                 if(i===j && board[i][j]===board[i+1][j+1] && board[i][j]===board[i+2][j+2] && board[i][i]!==0 ){
-                    result= board[i][j]
+                    return board[i][j]
                 }
                 if(board[0][2]===board[1][1] && board[0][2]===board[2][0] && board[0][2]!==0 ){
-                    result= board[0][2]
+                    return board[0][2]
                 }
                 else{
-                    result= null;
+                    return null;
                 }
             }
         }
+    }
+    let result=checkBoard();
     if(result===player1.mark){
         return player1;
     }
