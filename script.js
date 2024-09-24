@@ -25,6 +25,11 @@ function playGame(player1,player2){
             console.log("player 2 turn\nchoose the cell you  want")
             let row=prompt("Enter cell number (1-9)")
             let column=prompt("Enter cell number (1-9)")
+            while(board[row][column]!==0 || row>3||column>3){
+                console.log("Invalid move, try again")
+                row=prompt("Enter cell number (1-9)")
+                column=prompt("Enter cell number (1-9)")
+            }
             board[row][column]="O"
             round++;
         }
@@ -32,6 +37,11 @@ function playGame(player1,player2){
             console.log("player 1 turn\nchoose the cell you  want")
             let row=prompt("Enter cell number (1-9)")
             let column=prompt("Enter cell number (1-9)")
+            while(board[row][column]!==0 || row>3||column>3){
+                console.log("Invalid move, try again")
+                row=prompt("Enter cell number (1-9)")
+                column=prompt("Enter cell number (1-9)")
+            }
             board[row][column]="X"
             round++;
         }
@@ -48,37 +58,36 @@ function playGame(player1,player2){
          console.log(winner)
     }
 }
-function determineWinner(player1,player2,board){
-    function checkBoard(){
-        for(let i=0;i<3;i++){
-            for(let j=0;j<1;j++){
-                if(board[i][j]===board[i][j+1] && board[i][j]===board[i][j+2] && board[i][j]!==0){
-                    return board[i][j]
-                }
-                if(board[j][i]===board[j+1][i] && board[j][i]===board[j+2][i] && board[j][i]!==0){
-                    return board[j][i]
-                }
-                if(i===j && board[i][j]===board[i+1][j+1] && board[i][j]===board[i+2][j+2] && board[i][i]!==0 ){
-                    return board[i][j]
-                }
-                if(board[0][2]===board[1][1] && board[0][2]===board[2][0] && board[0][2]!==0 ){
-                    return board[0][2]
-                }
-                else{
-                    return null;
-                }
+function determineWinner(player1, player2, board) {
+    function checkBoard() {
+        // Check rows and columns
+        for (let i = 0; i < 3; i++) {
+            if (board[i][0] === board[i][1] && board[i][0] === board[i][2] && board[i][0] !== 0) {
+                return board[i][0];
+            }
+            if (board[0][i] === board[1][i] && board[0][i] === board[2][i] && board[0][i] !== 0) {
+                return board[0][i];
             }
         }
+    
+        if (board[0][0] === board[1][1] && board[0][0] === board[2][2] && board[0][0] !== 0) {
+            return board[0][0];
+        }
+        if (board[0][2] === board[1][1] && board[0][2] === board[2][0] && board[0][2] !== 0) {
+            return board[0][2];
+        }
+        
+        return null; 
     }
-    let result=checkBoard();
-    if(result===player1.mark){
+
+    let result = checkBoard();
+    if (result === player1.mark) {
         return player1;
-    }
-    else if(result===null){
-        return "No winner"
-    }
-    else{
+    } else if (result === null) {
+        return "No winner";
+    } else {
         return player2;
     }
 }
+
 playGame(player1,player2)
