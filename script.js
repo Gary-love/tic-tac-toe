@@ -1,3 +1,4 @@
+const drops=document.querySelectorAll(".drop")
 function gameBoard(){
     const row=3;
     const column=3;
@@ -20,8 +21,14 @@ function playGame(player1,player2){
     let round=1;
     let game=gameBoard();
     let board=game.getBoard();
+    const getRound=()=>round;
     while(round<=9){
         if(round%2===0){
+            drops.forEach((drop) => {
+                drop.addEventListener("click",e=>{
+                    drop.textContent="O";
+                })
+            });
             console.log("player 2 turn\nchoose the cell you  want")
             let row=prompt("Enter cell number (1-9)")
             let column=prompt("Enter cell number (1-9)")
@@ -34,6 +41,11 @@ function playGame(player1,player2){
             round++;
         }
         else{
+            drops.forEach((drop) => {
+                drop.addEventListener("click",e=>{
+                    drop.textContent="X";
+                })
+            });
             console.log("player 1 turn\nchoose the cell you  want")
             let row=prompt("Enter cell number (1-9)")
             let column=prompt("Enter cell number (1-9)")
