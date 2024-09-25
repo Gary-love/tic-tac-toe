@@ -21,55 +21,55 @@ function playGame(player1,player2){
     let round=1;
     let game=gameBoard();
     let board=game.getBoard();
-    const getRound=()=>round;
-    while(round<=9){
-        if(round%2===0){
-            drops.forEach((drop) => {
-                drop.addEventListener("click",e=>{
+    drops.forEach((drop) => {
+        drop.addEventListener("click",e=>{
+            if(round<=9){
+                if(round%2===0){
                     drop.textContent="O";
-                })
-            });
-            console.log("player 2 turn\nchoose the cell you  want")
-            let row=prompt("Enter cell number (1-9)")
-            let column=prompt("Enter cell number (1-9)")
-            while(board[row][column]!==0 || row>3||column>3){
-                console.log("Invalid move, try again")
-                row=prompt("Enter cell number (1-9)")
-                column=prompt("Enter cell number (1-9)")
-            }
-            board[row][column]="O"
-            round++;
-        }
-        else{
-            drops.forEach((drop) => {
-                drop.addEventListener("click",e=>{
+                    let row=drop.parentElement.className;
+                    let column=drop.className[5];
+                    board[row][column]="O";
+                    round++;
+                    let winner=determineWinner(player1,player2,board)
+                    if(winner==="No winner"){
+                      console.log("No winner yet")  
+                    }
+                    else{
+                        console.log(winner)
+                        round=10;
+                    }
+                     console.log(board)
+                     console.log(round)
+                     console.log(winner)
+                  
+                }
+                else{
                     drop.textContent="X";
-                })
-            });
-            console.log("player 1 turn\nchoose the cell you  want")
-            let row=prompt("Enter cell number (1-9)")
-            let column=prompt("Enter cell number (1-9)")
-            while(board[row][column]!==0 || row>3||column>3){
-                console.log("Invalid move, try again")
-                row=prompt("Enter cell number (1-9)")
-                column=prompt("Enter cell number (1-9)")
+                    let row=drop.parentElement.className;
+                    let column=drop.className[5];
+                    board[row][column]="X";
+                    round++;
+                    let winner=determineWinner(player1,player2,board)
+                    if(winner==="No winner"){
+                      console.log("No winner yet")  
+                    }
+                    else{
+                        console.log(winner)
+                        round=10;
+                    }
+                     console.log(board)
+                     console.log(round)
+                     console.log(winner)
+                }
             }
-            board[row][column]="X"
-            round++;
-        }
-        let winner=determineWinner(player1,player2,board)
-        if(winner==="No winner"){
-          console.log("No winner yet")  
-        }
-        else{
-            console.log(winner)
-            round=10;
-        }
-         console.log(board)
-         console.log(round)
-         console.log(winner)
+            else{
+                drop.removeEventListener('click',e=>{
+                })
+            } 
+        },{once:true}) 
+    });
     }
-}
+
 function determineWinner(player1, player2, board) {
     function checkBoard() {
         // Check rows and columns
@@ -101,5 +101,4 @@ function determineWinner(player1, player2, board) {
         return player2;
     }
 }
-
 playGame(player1,player2)
