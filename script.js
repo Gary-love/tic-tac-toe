@@ -45,8 +45,9 @@ function playGame(player1,player2){
                           console.log("No winner yet")  
                         }
                         else{
-                            console.log(winner)
-                            result.textContent=`${winner.name}`
+                            currentRound.textContent=`Game Over`
+                            currentRound.style="color:red ;font-size: 60px"
+                            result.textContent=`Winner: ${winner.name}`
                             round=10;
                         }
                          console.log(board)
@@ -68,7 +69,9 @@ function playGame(player1,player2){
                         }
                         else{
                             console.log(winner)
-                            result.textContent=`${winner.name}`
+                            currentRound.textContent=`Game Over`
+                            currentRound.style="color:red ;font-size: 60px"
+                            result.textContent=`Winner: ${winner.name}`
                             round=10;
                         }
                          console.log(board)
@@ -82,6 +85,7 @@ function playGame(player1,player2){
                 } 
             },{once:true}) 
         });
+       
     }
     }
 
@@ -121,8 +125,9 @@ reset.addEventListener("click",e=>{
         drop.textContent=""
         round=1;
         currentRound.textContent=`Round: ${round}`
-        player.textContent=""
-        mark.textContent=""
+        currentRound.style="color:white; font-size:50px"
+        player.textContent="Player'1 turn"
+        mark.textContent="Current mark: X"
         result.textContent=""
         board=gameBoard().getBoard();
         console.log(board)

@@ -39,7 +39,39 @@ table{
 
 th{
     height: 200px;
+    font-size: 100px;
+    text-align: center;
+    color: black;
 }
 th:hover{
     background-color: rgb(93, 219, 54);
+}
+.display{
+    display: flex;
+    gap: 10px;
+}
+.status{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    >.round{
+        font-size: 50px;
+    }
+    >.player{
+        font-size: 20px;
+    }
+    >.mark{
+        font-size: 30px;
+    }
+}
+button{
+    margin: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: rgb(23, 151, 140);
+    border-radius: 15px;
+    border-color: aliceblue;
+    height: 50px;
+    width: 80px;
 }
