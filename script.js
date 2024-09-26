@@ -42,7 +42,7 @@ function playGame(player1,player2){
                         currentRound.textContent=`Round: ${round}`
                         let winner=determineWinner(player1,player2,board)
                         if(winner==="No winner"){
-                          console.log("No winner yet")  
+                          
                         }
                         else{
                             currentRound.textContent=`Game Over`
@@ -50,9 +50,6 @@ function playGame(player1,player2){
                             result.textContent=`Winner: ${winner.name}`
                             round=10;
                         }
-                         console.log(board)
-                         console.log(round)
-                         console.log(winner)
                     }
                     else{
                         player.textContent="Player 2's turn"
@@ -64,19 +61,15 @@ function playGame(player1,player2){
                         round++;
                         currentRound.textContent=` Round: ${round}`
                         let winner=determineWinner(player1,player2,board)
-                        if(winner==="No winner"){
-                          console.log("No winner yet")  
+                        if(winner==="No winner"){ 
                         }
                         else{
-                            console.log(winner)
+                            (winner)
                             currentRound.textContent=`Game Over`
                             currentRound.style="color:red ;font-size: 60px"
                             result.textContent=`Winner: ${winner.name}`
                             round=10;
                         }
-                         console.log(board)
-                         console.log(round)
-                         console.log(winner)
                     }
                 }
                 else{
@@ -130,8 +123,6 @@ reset.addEventListener("click",e=>{
         mark.textContent="Current mark: X"
         result.textContent=""
         board=gameBoard().getBoard();
-        console.log(board)
-        console.log(round)
         playGame(player1,player2)
     })
 })
