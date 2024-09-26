@@ -3,6 +3,7 @@ const currentRound=document.querySelector(".round")
 const player=document.querySelector(".player")
 const mark=document.querySelector(".mark")
 const result=document.querySelector(".winner")
+const reset=document.querySelector(".reset")
 function gameBoard(){
     const row=3;
     const column=3;
@@ -25,60 +26,63 @@ function playGame(player1,player2){
     let round=1;
     let game=gameBoard();
     let board=game.getBoard();
-    drops.forEach((drop) => {
-        drop.addEventListener("click",e=>{
-            if(round<=9){
-                if(round%2===0){
-                    player.textContent="Player 1's turn"
-                    drop.textContent="O";
-                    let row=drop.parentElement.className;
-                    let column=drop.className[5];
-                    board[row][column]="O";
-                    mark.textContent="Current mark: X"
-                    round++;
-                    currentRound.textContent=`Round: ${round}`
-                    let winner=determineWinner(player1,player2,board)
-                    if(winner==="No winner"){
-                      console.log("No winner yet")  
+    games()
+    function games(){
+        drops.forEach((drop) => {
+            drop.addEventListener("click",e=>{
+                if(round<=9){
+                    if(round%2===0){
+                        player.textContent="Player 1's turn"
+                        drop.textContent="O";
+                        let row=drop.parentElement.className;
+                        let column=drop.className[5];
+                        board[row][column]="O";
+                        mark.textContent="Current mark: X"
+                        round++;
+                        currentRound.textContent=`Round: ${round}`
+                        let winner=determineWinner(player1,player2,board)
+                        if(winner==="No winner"){
+                          console.log("No winner yet")  
+                        }
+                        else{
+                            console.log(winner)
+                            result.textContent=`${winner.name}`
+                            round=10;
+                        }
+                         console.log(board)
+                         console.log(round)
+                         console.log(winner)
                     }
                     else{
-                        console.log(winner)
-                        result.textContent=`${winner.name}`
-                        round=10;
+                        player.textContent="Player 2's turn"
+                        drop.textContent="X";
+                        let row=drop.parentElement.className;
+                        let column=drop.className[5];
+                        board[row][column]="X";
+                        mark.textContent="Current mark: O"
+                        round++;
+                        currentRound.textContent=` Round: ${round}`
+                        let winner=determineWinner(player1,player2,board)
+                        if(winner==="No winner"){
+                          console.log("No winner yet")  
+                        }
+                        else{
+                            console.log(winner)
+                            result.textContent=`${winner.name}`
+                            round=10;
+                        }
+                         console.log(board)
+                         console.log(round)
+                         console.log(winner)
                     }
-                     console.log(board)
-                     console.log(round)
-                     console.log(winner)
                 }
                 else{
-                    player.textContent="Player 2's turn"
-                    drop.textContent="X";
-                    let row=drop.parentElement.className;
-                    let column=drop.className[5];
-                    board[row][column]="X";
-                    mark.textContent="Current mark: O"
-                    round++;
-                    currentRound.textContent=` Round: ${round}`
-                    let winner=determineWinner(player1,player2,board)
-                    if(winner==="No winner"){
-                      console.log("No winner yet")  
-                    }
-                    else{
-                        console.log(winner)
-                        result.textContent=`${winner.name}`
-                        round=10;
-                    }
-                     console.log(board)
-                     console.log(round)
-                     console.log(winner)
-                }
-            }
-            else{
-                drop.removeEventListener('click',e=>{
-                })
-            } 
-        },{once:true}) 
-    });
+                    drop.removeEventListener('click',e=>{
+                    })
+                } 
+            },{once:true}) 
+        });
+    }
     }
 
 function determineWinner(player1, player2, board) {
@@ -112,4 +116,18 @@ function determineWinner(player1, player2, board) {
         return player2;
     }
 }
+reset.addEventListener("click",e=>{
+    drops.forEach((drop)=>{
+        drop.textContent=""
+        round=1;
+        currentRound.textContent=`Round: ${round}`
+        player.textContent=""
+        mark.textContent=""
+        result.textContent=""
+        board=gameBoard().getBoard();
+        console.log(board)
+        console.log(round)
+        playGame(player1,player2)
+    })
+})
 playGame(player1,player2)
